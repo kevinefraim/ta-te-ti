@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import FormPj from "./components/formPj/FormPj";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Game from "./components/formPj/game/Game";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="text-center p-1 text-light">
+        <h1 className="mt-5">Ta Te Ti en React.js</h1>
+        <h2>Elige tu símbolo</h2>
+      </div>
+      <Routes>
+        <Route path="/" element={<FormPj />}></Route>
+        <Route path="/game" element={<Game />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
