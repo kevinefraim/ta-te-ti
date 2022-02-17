@@ -1,28 +1,16 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Game from "../game/Game";
+
 import "./FormPj.css";
 
-const FormPj = () => {
-  const [name1, setName1] = useState("");
-  const [name2, setName2] = useState("");
-  const [activePj, setActivePj] = useState(false);
-  const [players, setPlayers] = useState(
-    JSON.parse(localStorage.getItem("players")) ?? []
-  );
-
-  useEffect(() => {
-    localStorage.setItem("players", JSON.stringify(players));
-  }, [players]);
-
+const FormPj = ({ name1, name2, setName1, setName2, setPlayers, players }) => {
   const submitForm = (e) => {
     e.preventDefault();
     setPlayers([name1, name2]);
-    setActivePj(true);
     setName1("");
     setName2("");
   };
-  console.log(players);
+
   return (
     <main>
       <div className="form-container">
@@ -58,19 +46,13 @@ const FormPj = () => {
           </div>
 
           <div className="btn-container">
-            {activePj ? (
-              <Link to="game">
-                <button className="btn-play text-primary">Ir a Jugar</button>
-              </Link>
-            ) : (
-              <button type="submit" className="btn-play text-primary">
-                Aceptar
-              </button>
-            )}
+            <Link to="game">
+              <button className="btn-play text-primary">Ir a Jugar</button>
+            </Link>
 
-            <div className="d-none">
-              <Game players={players} />
-            </div>
+            <button type="submit" className="btn-play text-primary">
+              Aceptar
+            </button>
           </div>
         </form>
       </div>

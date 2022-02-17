@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Game.css";
 
-const Game = (players) => {
-  console.log(players);
+const Game = ({ players }) => {
   const [turn, setTurn] = useState("X");
   const [cells, setCells] = useState(Array(9).fill(""));
-  const [ganador, setGanador] = useState();
+  const [ganador, setGanador] = useState(null);
+  const [ganadorPj, setGanadorPj] = useState("");
+
+  useEffect(() => {
+    if (ganador) {
+      ganador === "X" ? setGanadorPj(players[0]) : setGanadorPj(players[1]);
+    }
+  }, [ganador]);
 
   //componente de cell
   const Cell = ({ num }) => {
@@ -65,19 +71,16 @@ const Game = (players) => {
   //funcion que retorna el array cells como inició
   const reset = () => {
     setGanador(null);
+    setTurn("X");
     return setCells(Array(9).fill(""));
   };
 
   return (
     <main>
-      <button onClick={reset} className="btn btn-primary">
+      <button onClick={reset} className="btn my-2 btn-primary">
         reset
       </button>
-      {/* {ganador && (
-        <p className="text-center">
-          {ganador === "X" ? name1 : name2} es el ganador
-        </p>
-      )} */}
+      {ganador && <h2 className="text-center">{ganadorPj} es el ganador</h2>}
       <div className="cell-container">
         <Cell num={0} />
         <Cell num={1} />
