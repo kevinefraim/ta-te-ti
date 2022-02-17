@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./Game.css";
 
 const Game = ({ players }) => {
   const [turn, setTurn] = useState("X");
   const [cells, setCells] = useState(Array(9).fill(""));
+
   const [ganador, setGanador] = useState(null);
   const [ganadorPj, setGanadorPj] = useState("");
 
@@ -77,9 +79,15 @@ const Game = ({ players }) => {
 
   return (
     <main>
-      <button onClick={reset} className="btn my-2 btn-primary">
-        reset
-      </button>
+      <div className="d-flex align-items-center">
+        {" "}
+        <Link to="/">
+          <button className="btn m-2 btn-primary">Inicio</button>
+        </Link>
+        <button onClick={reset} className="btn m-2 btn-primary">
+          reset
+        </button>
+      </div>
       {ganador && <h2 className="text-center">{ganadorPj} es el ganador</h2>}
       <div className="cell-container">
         <Cell num={0} />
