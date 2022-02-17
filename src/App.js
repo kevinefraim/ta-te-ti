@@ -1,6 +1,6 @@
 import "./App.css";
 import FormPj from "./components/formPj/FormPj";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { HashRouter as Router, Routes, Route } from "react-router-dom";
 import Game from "./components/game/Game";
 import { useEffect, useState } from "react";
 
