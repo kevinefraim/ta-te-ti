@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Game.css";
 
-const Game = ({ players }) => {
+const Game = ({ players, setPlayers }) => {
   const [turn, setTurn] = useState("X");
   const [cells, setCells] = useState(Array(9).fill(""));
+  const navigate = useNavigate();
 
   const [ganador, setGanador] = useState(null);
   const [ganadorPj, setGanadorPj] = useState("");
@@ -18,7 +19,12 @@ const Game = ({ players }) => {
   //componente de cell
   const Cell = ({ num }) => {
     return (
-      <div onClick={() => handleClick(num)} className="cell">
+      <div
+        className={
+          cells[num] === "X" ? "font-color-x cell" : "font-color-o cell"
+        }
+        onClick={() => handleClick(num)}
+      >
         {cells[num]}
       </div>
     );
@@ -74,21 +80,28 @@ const Game = ({ players }) => {
   const reset = () => {
     setGanador(null);
     setTurn("X");
+    setPlayers([]);
+    navigate("/");
     return setCells(Array(9).fill(""));
   };
 
   return (
     <main>
-      <div className="d-flex align-items-center">
-        {" "}
-        <Link to="/">
-          <button className="btn m-2 btn-primary">Inicio</button>
-        </Link>
-        <button onClick={reset} className="btn m-2 btn-primary">
-          reset
-        </button>
-      </div>
-      {ganador && <h2 className="text-center">{ganadorPj} es el ganador</h2>}
+      <button onClick={reset} className="btn m-2 btn-primary">
+        Reset
+      </button>
+
+      {ganador && (
+        <h2
+          className={
+            ganador === "X"
+              ? "font-color-x text-center m2"
+              : "font-color-o text-center m2"
+          }
+        >
+          {ganadorPj} es el ganador
+        </h2>
+      )}
       <div className="cell-container">
         <Cell num={0} />
         <Cell num={1} />

@@ -6,6 +6,8 @@ import "./FormPj.css";
 const FormPj = ({ name1, name2, setName1, setName2, setPlayers, players }) => {
   const [activePj, setActivePj] = useState(false);
   const submitForm = (e) => {
+    if (name1 === "" || name2 === "")
+      return alert("Debes completar todos los campos");
     e.preventDefault();
     setActivePj(true);
     setPlayers([name1, name2]);
@@ -16,15 +18,11 @@ const FormPj = ({ name1, name2, setName1, setName2, setPlayers, players }) => {
   return (
     <main>
       <div className="form-container">
-        <h3 className="text-center  pt-2">Inserte jugadores</h3>
+        {!activePj && <h3 className="text-center  pt-2">Inserte jugadores</h3>}
         <form onSubmit={submitForm} className="form-players">
           <div className="btn-container">
-            <p type="button" className="btn-symbol text-center text-primary">
-              X
-            </p>
-            <p type="button" className="btn-symbol text-center text-success">
-              O
-            </p>
+            <p className="btn-symbol text-center text-primary">X</p>
+            <p className="btn-symbol text-center text-success">O</p>
           </div>
 
           {activePj ? (
