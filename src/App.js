@@ -16,7 +16,7 @@ function App() {
 
   return (
     <Router>
-      <h1 className="text-center p-4 text-light">Ta Te Ti en React.js</h1>
+      <h1 className="text-center p-2 text-light">Ta Te Ti en React.js</h1>
       <Routes>
         <Route
           path="/"

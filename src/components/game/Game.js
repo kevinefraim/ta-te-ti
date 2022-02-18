@@ -91,7 +91,7 @@ const Game = ({ players, setPlayers }) => {
         Reset
       </button>
 
-      {ganador && (
+      {ganador ? (
         <h2
           className={
             ganador === "X"
@@ -101,6 +101,8 @@ const Game = ({ players, setPlayers }) => {
         >
           {ganadorPj} es el ganador
         </h2>
+      ) : (
+        <h2>{`${players[0]} VS ${players[1]}`}</h2>
       )}
       <div className="cell-container">
         <Cell num={0} />
